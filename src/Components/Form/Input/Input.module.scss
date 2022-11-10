@@ -1,0 +1,16 @@
+.input{
+  margin-bottom: 1em;
+  label{
+    font-weight: 700;
+    margin-bottom: 0.6em;
+  }
+  input{
+    border: none;
+    padding: 0.7em;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  input::placeholder{
+    color: #7e7e7e;
+  }
+}

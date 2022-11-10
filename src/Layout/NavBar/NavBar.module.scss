@@ -1,0 +1,19 @@
+  .navBar{
+    background: #222;
+    padding:1em;
+    width: 100%;
+    box-sizing: border-box;
+    &__list{
+      list-style: none;
+      display: flex;
+      align-items: center ;
+    }
+    a{
+      color: #fff;
+      text-decoration: none;
+      margin-right: 1em;
+    }
+    a:hover{
+      color: #ffbb33;
+    }
+  }

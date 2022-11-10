@@ -1,0 +1,24 @@
+.home{
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5em;
+  align-items: center;
+  justify-content: center;
+  h1{
+    font-size: 2.5em;
+    strong{
+      background: #222222;
+      padding: 0 0.2em;
+      color: #ffbb33;
+    }
+    }
+  p{
+    color: #7b7b7b;
+  }
+  img{
+    width: 350px;
+  }
+ 
+}
