@@ -4,15 +4,21 @@ type IProps = {
   label?:string,
   name?:string,
   options?:ICategories[],
-  handleSubmit?:any,
+  handleSelect?:(e: React.ChangeEvent<HTMLSelectElement>) => void
   value?:string
+  
 }
 
-export default function Select ({label, name, options, handleSubmit, value}:IProps){
+export default function Select ({label, name, options, handleSelect, value}:IProps){
   return (
     <div className={styles.select}>
       <label htmlFor={name}>{label}</label>
-      <select value={value} name={name} id={name}>
+      <select 
+        value={value || ''} 
+        name={name} 
+        id={name} 
+        onChange={handleSelect}>
+
         <option >Selecione uma opção:</option>
         {options?.map((item, index) => <option key={item.id} value={item.id}>{item.name}</option> )}
       </select></div>

@@ -1,21 +1,22 @@
-import LinkButton from 'Layout/LinkButton/LinkButton';
 import { useEffect, useState } from 'react';
+import ICategories from 'Types/ICategories';
+import IProjects from 'Types/IProjects';
 import Button from './Button/Button';
 import styles from './Form.module.scss';
 import Input from './Input/Input';
 import Select from './Select/Select';
-import ICategories from 'Types/ICategories'
 
 type IProps = {
-  btnText: string
+  btnText: string,
+  createProject: (project: IProjects) => void,
+  projectData?:any
 }
 
-export default function Form({ btnText }: IProps) {
+export default function Form({ btnText, createProject,projectData}: IProps) {
 
-  const [ProjectName, setProjectName] = useState<string>('');
-  const [ProjectBudget, setProjectBudget] = useState<number>(0);
   const [categories, setCategories] = useState<ICategories[]>([]);
-
+  const [project, setProject] = useState(projectData || {})
+  
   useEffect(() => {
     fetch('http://localhost:5000/categories', {
       method: 'GET',
@@ -26,35 +27,50 @@ export default function Form({ btnText }: IProps) {
       .then((response) => response.json())
       .then((data) => {
         setCategories(data);
-        console.log(data)
       })
       .catch((error) => console.log(error))
   }, [])
-  const mostarDados = (e:React.FormEvent<HTMLFormElement>) =>{
+  
+  const submit = (e:React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault();
-    console.log(`Projeto: ${ProjectName} Budget: ${ProjectBudget}`)
+    createProject(project)
   }
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
+    setProject({...project,[e.target.name]:e.target.value})
+  }
+
+  const handleSelect = (e:React.ChangeEvent<HTMLSelectElement>)=>{
+    setProject({...project, category:{
+      id: e.target.value,
+      name: e.target.options[e.target.selectedIndex].text
+    }})
+  }
+
   return (
 
-    <form className={styles.form} onSubmit={mostarDados}>
+    <form className={styles.form} onSubmit={submit}>
 
       <Input
         name='name'
         label="Nome do projeto:"
         type="text"
         ph="Insira o nome do projeto"
-        value={ProjectName}
-        handleSubmit={setProjectName}
+        handleChange={handleChange}
       />  
       <Input
         name='budget'
         label="Orçamento do projeto:"
         type="number"
         ph="Insira o orçamento atual"
-        value={ProjectBudget}
-        handleSubmit={setProjectBudget}
+        handleChange={handleChange}
       />
-      <Select options={categories} name='category_id' label='Selecione a categoria:' />
+      <Select 
+      options={categories} 
+      name='category_id' 
+      label='Selecione a categoria:' 
+      handleSelect={handleSelect}
+      value={project.category ? project.category.id:''}
+      />
 
       <Button text={btnText} />
 
