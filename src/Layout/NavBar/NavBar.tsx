@@ -1,4 +1,3 @@
-import Home from "Pages/Home/Home";
 import { Link } from "react-router-dom";
 import styles from './NavBar.module.scss'
 import logo from '../../assets/img/costs_logo.png'

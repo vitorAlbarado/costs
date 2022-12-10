@@ -1,5 +1,3 @@
-import Home from 'Pages/Home/Home';
-import { Outlet } from 'react-router-dom';
 import styles from './Container.module.scss';
 type props ={
   customClass:string,

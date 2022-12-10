@@ -1,6 +1,5 @@
 import Projects from 'Pages/Projects/Projects';
-import Projetos from 'Pages/Projects/Projects';
-import {BrowserRouter, Link, Route, Router, Routes} from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Container from "./Layout/Container";
 import Footer from './Layout/Footer/Footer';
 import NavBar from './Layout/NavBar/NavBar';
